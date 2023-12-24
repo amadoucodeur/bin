@@ -10,25 +10,32 @@ fi
 PROJECT_NAME=$1
 
 # Le dossier parent
+echo "Creation de $PROJECT_NAME ..."
 mkdir $PROJECT_NAME
+echo "Déplacement dans $PROJECT_NAME ..."
 cd $PROJECT_NAME
 
 # Crée un environnement virtuel
+echo "Creation de env..."
 python3 -m venv env
 
 # Active l'environnement virtuel
+echo "Activation de env..."
 source env/bin/activate
 
 # Installe Django
+echo "Installation de Django..."
 pip install django
 
 # Crée le projet Django
+echo "Creation du projet Django..."
 django-admin startproject projet
 
 # Va dans le répertoire du projet
 # cd $PROJECT_NAME
 
 # Initialise le dépôt Git
+echo "Initialisation de git..."
 git init
 
 # Crée le fichier .gitignore
@@ -38,6 +45,7 @@ echo -e "# Virtual Environment\nenv/\n\n# Python\n*.pyc\n*.pyo\n__pycache__/\n\n
 # Effectue le premier commit
 
 # Crée le fichier requirements.txt
+echo "Creation du requirements.txt"
 pip freeze > requirements.txt
 
 # Ajoute le fichier requirements.txt à .gitignore
