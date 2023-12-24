@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Vérifie si le nombre d'arguments est correct
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <nom_du_projet>"
+    exit 1
+fi
+
+# Nom du projet
+PROJECT_NAME=$1
+
+# Le dossier parent
+mkdir $PROJECT_NAME
+cd $PROJECT_NAME
+
+# Crée un environnement virtuel
+python3 -m venv env
+
+# Active l'environnement virtuel
+source env/bin/activate
+
+# Installe Django
+pip install django
+
+# Crée le projet Django
+django-admin startproject projet
+
+# Va dans le répertoire du projet
+# cd $PROJECT_NAME
+
+# Initialise le dépôt Git
+git init
+
+# Crée le fichier .gitignore
+echo -e "# Virtual Environment\nenv/\n\n# Python\n*.pyc\n*.pyo\n__pycache__/\n\n# Django\n*.log\n*.pot\n*.pyc\n__pycache__/\nlocal_settings.py\n\n# Requirements\nrequirements.txt" > .gitignore
+
+
+# Effectue le premier commit
+
+# Crée le fichier requirements.txt
+pip freeze > requirements.txt
+
+# Ajoute le fichier requirements.txt à .gitignore
+echo "requirements.txt" >> .gitignore
+
+# Effectue le deuxième commit
+git add .
+git commit -m "Initial commit"
+
+# Affiche un message d'instructions
+echo "Projet Django '$PROJECT_NAME' créé avec succès."
+echo "N'oubliez pas d'activer l'environnement virtuel avec 'source env/bin/activate'."
+
